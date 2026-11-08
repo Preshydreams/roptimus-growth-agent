@@ -24,4 +24,4 @@ jobs:
       - name: Run growth agent
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        run: python main.py
+        run: python agent.py
