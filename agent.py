@@ -83,7 +83,7 @@ def save_offset(offset):
             ["git", "commit", "-m", "Save Telegram update offset"],
             check=True
         )
-        subprocess.run(["git", "push"], check=True)
+        subprocess.run(["git", "push", "origin", f"HEAD:{os.environ.get('GITHUB_REF_NAME', 'main')}"], check=True)
 
 
 def main():
