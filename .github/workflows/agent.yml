@@ -3,11 +3,19 @@ name: Roptimus Growth Agent
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "*/5 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: roptimus-growth-agent
+  cancel-in-progress: false
 
 jobs:
   growth-agent:
     runs-on: ubuntu-latest
+    timeout-minutes: 2
 
     steps:
       - name: Get project files
@@ -19,4 +27,6 @@ jobs:
           python-version: "3.11"
 
       - name: Run growth agent
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         run: python agent.py
